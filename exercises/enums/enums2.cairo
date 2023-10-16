@@ -1,28 +1,24 @@
-// enums2.cairo
-// Execute `starklings hint enums2` or use the `hint` watch subcommand for a hint.
-
-// I AM NOT DONE
-
 use debug::PrintTrait;
 use array::ArrayTrait;
 use traits::Into;
 
 #[derive(Copy, Drop)]
-enum Message { // TODO: define the different variants used below
+enum Message {
+    Quit,
+    Echo(felt252),
+    Move((felt252, felt252)),
+    ChangeColor((felt252, felt252, felt252)),
 }
-
 
 fn main() {
     let mut messages: Array<Message> = ArrayTrait::new();
-    messages.append(Message::Quit(()));
-    messages.append(Message::Echo('hello world'));
+    messages.append(Message::Quit);
+    messages.append(Message::Echo("hello world".to_string()));
     messages.append(Message::Move((10, 30)));
     messages.append(Message::ChangeColor((0, 255, 255)));
 
     print_messages_recursive(messages, 0)
 }
-
-// Utility function to print messages. Don't modify these.
 
 trait MessageTrait<T> {
     fn call(self: T);
@@ -39,7 +35,7 @@ fn print_messages_recursive(messages: Array<Message>, index: u32) {
         Option::Some(_) => {},
         Option::None(_) => {
             let mut data = ArrayTrait::<felt252>::new();
-            data.append('OOG');
+            data.append("OOG".to_string());
             panic(data);
         },
     }
@@ -51,12 +47,11 @@ fn print_messages_recursive(messages: Array<Message>, index: u32) {
     print_messages_recursive(messages, index + 1)
 }
 
-
 impl MessagePrintImpl of PrintTrait<Message> {
     fn print(self: Message) {
-        ('___MESSAGE BEGINS___').print();
+        "___MESSAGE BEGINS___".print();
         match self {
-            Message::Quit(()) => ('Quit').print(),
+            Message::Quit => "Quit".print(),
             Message::Echo(msg) => msg.print(),
             Message::Move((a, b)) => {
                 a.print();
@@ -68,6 +63,6 @@ impl MessagePrintImpl of PrintTrait<Message> {
                 blue.print();
             }
         }
-        ('___MESSAGE ENDS___').print();
+        "___MESSAGE ENDS___".print();
     }
 }

@@ -4,14 +4,14 @@
 // Write a function that calculates the price of an order of apples given
 // the quantity bought. No hints this time!
 
-// I AM NOT DONE
+fn calculate_price_of_apples(quantity: u32) -> u32 {
+    if quantity <= 40 {
+        return quantity * 3;
+    } else {
+        return quantity * 2;
+    }
+}
 
-// Put your function here!
-// fn calculate_price_of_apples{
-
-// }
-
-// Do not change the tests!
 #[test]
 fn verify_test() {
     let price1 = calculate_price_of_apples(35);
@@ -24,3 +24,4 @@ fn verify_test() {
     assert(82 == price3, 'Incorrect price');
     assert(130 == price4, 'Incorrect price');
 }
+

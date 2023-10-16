@@ -1,8 +1,6 @@
 // move_semantics1.cairo
 // Execute `starklings hint move_semantics1` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
-
 use array::ArrayTrait;
 use array::ArrayTCloneImpl;
 use array::SpanTrait;
@@ -17,10 +15,13 @@ fn main() {
     // This is just a print statement for arrays.
     arr1.clone().print();
 
-    //TODO fix the error here without modifying this line.
+    // Clone arr1 to make a copy
+    let arr2 = arr1.clone();
+
+    // Append to the original arr1
     arr1.append(88);
 
-    arr1.clone().print();
+    arr2.clone().print();
 }
 
 fn fill_arr(arr: Array<felt252>) -> Array<felt252> {
@@ -32,3 +33,4 @@ fn fill_arr(arr: Array<felt252>) -> Array<felt252> {
 
     arr
 }
+
